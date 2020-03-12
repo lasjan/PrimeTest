@@ -39,8 +39,20 @@ namespace PrimeTest
                 int startIndex;
                 int endIndex;
 
-                Console.WriteLine(" *** Prime seek ***");
+                Console.WriteLine("*** Prime seek ***");
+                Console.WriteLine("Please enter start index..");
 
+                var startInput = Console.ReadLine();
+                if (!Int32.TryParse(startInput, out startIndex))
+                {
+                    throw new ArgumentException(String.Format(ERR_NOT_NUMBER, startInput));
+                }
+                Console.WriteLine("Please enter end index..");
+                var endtInput = Console.ReadLine();
+                if (!Int32.TryParse(endtInput, out endIndex))
+                {
+                    throw new ArgumentException(String.Format(ERR_NOT_NUMBER, endIndex));
+                }
                 ProcessRange(startIndex, endIndex, (v) => { Console.WriteLine(v); });
             }
             catch(ArgumentException aex)
