@@ -8,20 +8,51 @@ namespace PrimeTest
 {
     class Program
     {
+        static readonly string ERR_NOT_NUMBER = "Value '{0}' could not be parsed as integer..";
+        static readonly string ERR_START_HIGHER_THAN_END = "Start index '{0}' is lower than end index '{1}'";
+
         static bool CheckIfPrime(int value)
         {
-            for(int i = 0; i < value; i++)
+            for(int i = 2;  i < value; i++)
             {
-                if(i%value == 0 )
+                if(value % i == 0 )
                 {
                     return false;
                 }
             }
             return true;
         }
+        static void ProcessRange(int startIndex, int endIndex, Action<string> action)
+        {
+            for(int i = startIndex; i <= endIndex; i++)
+            {
+                if(CheckIfPrime(i))
+                {
+                    action(i.ToString());
+                }
+            }
+        }
         static void Main(string[] args)
         {
-            
+            try
+            {
+                int startIndex;
+                int endIndex;
+
+                Console.WriteLine(" *** Prime seek ***");
+
+                ProcessRange(startIndex, endIndex, (v) => { Console.WriteLine(v); });
+            }
+            catch(ArgumentException aex)
+            {
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            Console.WriteLine("Press any key..");
+            Console.ReadKey();
         }
     }
 }
